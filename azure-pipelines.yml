@@ -1,0 +1,117 @@
+# Name of the build this will generate
+
+name: 'Name set dynamically below in task'
+
+
+
+# Pipeline has no trigger
+
+trigger: none
+
+
+
+# Required to allow access to the other folders in the repo.
+
+pr:
+
+ - '*'
+
+
+
+# Use the sandard azure pipeline agent - latest image
+
+pool:
+
+  name: Azure Pipelines
+
+  vmImage: 'windows-2022'
+
+  demands:
+
+  - msbuild
+
+  - visualstudio
+
+
+
+parameters:
+
+
+
+#The branch instance of the system to build
+
+- name: inpBranch 
+
+  displayName: (if creating /updating templates ONLY) Name of Branch you wish to deposit the code into?
+
+  type: string
+
+  default: main
+
+  values:
+
+  - main
+
+  - dev/private-channels
+
+  - dev/release2
+
+  - master
+
+  - dev
+
+  - Dev
+
+  - SPFX-pipelines
+
+
+
+#The instance of the system to build
+
+- name: inpVG
+
+  displayName: Name of the Variable group containing the logic apps parameters (without _Logic_App on the end)
+
+  type: string
+
+
+
+#Enable Template creation?
+
+- name: inpTemplate 
+
+  displayName: Do you wish to create / update a template?
+
+  type: boolean
+
+  default: false
+
+
+
+#Enable parameter file creation?
+
+- name: inpParameter 
+
+  displayName: Do you wish to create a set of parameter files?
+
+  type: boolean
+
+  default: false
+
+  
+
+#Enable debug mode?
+
+- name: inpDebug 
+
+  displayName: Debug
+
+  type: string
+
+  default: Yes
+
+  values:
+
+  - Yes
+
+  - No
